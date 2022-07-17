@@ -1,11 +1,6 @@
 from banco_de_dados import *
 import os
 
-#host = 'localhost'
-#user = 'python'
-#database = 'notas'
-#duas_etapas = 'sua_senha'
-
 # Pega a tabela do banco de dados e imprime ao usuário
 def mostra_notas(host,user,pw,database):
     # Pega os dados
