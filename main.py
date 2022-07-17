@@ -144,7 +144,6 @@ while True:
     
     if window == janela4 and event == 'Ok':
         insere_materias(host,user,pw,database,values['materia'],values['codigo'],float(values['av1']),float(values['av2']),float(values['av3']),float(values['ava1']),float(values['ava2']),float(values['avd']),float(values['avds']))
-        janela4.hide()
         janela4 = janela_tabela()
     
     if window == janela4 and event == 'Criar':
