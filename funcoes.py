@@ -1,19 +1,10 @@
 from banco_de_dados import *
 import os
 
-host = 'localhost'
-user = 'python'
-database = 'notas'
-duas_etapas = 'sua_senha'
-
-# Verifica a senha de acesso ao database
-def verifica_senha():
-    global pw
-    os.system('cls' if os.name == 'nt' else 'clear')
-    pw = input("Para continuar, insira a senha do banco de dados: ")
-    while not verifica_senha_connection(host,user,pw):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        pw = input("Senha errada. Por favor, tente novamente: ")
+#host = 'localhost'
+#user = 'python'
+#database = 'notas'
+#duas_etapas = 'sua_senha'
 
 # Pergunta ao usuário qual operação vai ser efetuada
 def escolhe_operacao():
@@ -36,7 +27,7 @@ def escolhe_operacao():
     return escolha
 
 # Pega a tabela do banco de dados e imprime ao usuário
-def mostra_notas():
+def mostra_notas(host,user,pw,database):
     # Pega os dados
     ler_tabela = """
     SELECT *
@@ -54,8 +45,7 @@ def mostra_notas():
     # Cria um DataFrame com Panda
     colunas = ['ID','Matéria','Cód.','Carga','AV1','AVA1','AV2','AVA2','AV3','AVD','AVDS','Média']
     df = pd.DataFrame(leituras, columns = colunas)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(df)
+    return df
 
 # Calcula a média
 def calcula_media(av1,ava1,av2,ava2,av3,avd,avds):
@@ -78,7 +68,7 @@ def calcula_media(av1,ava1,av2,ava2,av3,avd,avds):
     return media
 
 # Preenche a tabela com as informções que o usuário insere
-def insere_materias():
+def insere_materias(host,user,pw,database):
     os.system('cls' if os.name == 'nt' else 'clear')
     # Pergunta ao usuário quantas matérias serão inseridas
     num = int(input("Quantas matérias você gostaria de inserir? --> "))
@@ -107,7 +97,7 @@ def insere_materias():
         execute_query(connection,inserir_dados)
 
 # Calcula o CR usando a DB
-def calcula_cr():
+def calcula_cr(host,user,pw,database):
     # Pega os dados
     ler_tabela = """
     SELECT *
@@ -125,9 +115,7 @@ def calcula_cr():
     print("Seu CR é:",cr,"\nCálculo feito a partir de",leituras[-1][0],"matérias.")
 
 # Verifica se o usuário é admin
-def verifica_admin():
-    # Faz a verificação com o SQL
-    verifica_senha()
+def verifica_admin(duas_etapas):
     # Inicia uma verificação em duas etapas com senha definida no topo do código
     count = 0
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -146,7 +134,7 @@ def verifica_admin():
             return False
 
 # Permite criar uma db e comitar
-def modo_admin():
+def modo_admin(host,user,pw,database):
     # Escolhe o tipo de operção a ser realizada
     os.system('cls' if os.name == 'nt' else 'clear')
     print('O que vocÊ deseja fazer?')

@@ -26,11 +26,12 @@ def verifica_senha_connection(host_name, user_name,pw):
             user=user_name,
             passwd=pw
         )
-        verificacao = True
+        print("MySQL Database connection successful")
+        return True
     except Error as err:
-        verificacao = False
-    
-    return verificacao
+        print(f"Error: '{err}'")
+        return False
+
 
 # Cria o banco de dados
 def create_database(connection, query):
